@@ -1,0 +1,53 @@
+﻿<Window x:Class="Chuck.Searchs"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Searchs" Height="450" Width="800"
+        FontSize="25">
+    <Grid Background="Lavender">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBox Name="SearchJokeTBox" MinWidth="250"></TextBox>
+                <Button  Name="SearchJokeBtn" Click="SearchJokeBtn_Click">Search</Button>
+            <ComboBox Name="CatCBox" ItemsSource="{Binding categories}"
+                      SelectedValuePath="{Binding}"
+                      DisplayMemberPath="{Binding}"
+                      SelectionChanged="CatCBox_SelectionChanged" Width="200"></ComboBox>
+            <Button  Name="RandomJokeBtn" Click="RandomJokeBtn_Click">Random</Button>
+            <Button Content="Exid" Name="LogOutBtn" Click="LogOutBtn_Click" Width="100" HorizontalAlignment="Left" Margin="10"/>
+        </StackPanel>
+            <Grid Grid.Row="1">
+                <DataGrid Name="JokesDGrid" 
+                      ColumnWidth="*" MinRowHeight="40" 
+                      AutoGenerateColumns="False" IsReadOnly="True"
+                      CanUserResizeColumns="False" CanUserResizeRows="False"
+                      CanUserReorderColumns="False" HorizontalScrollBarVisibility="Disabled"
+                       HeadersVisibility="Column" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                      >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Date" Binding="{Binding created_at}" Width="auto">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.Padding" Value="10"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Joke" Binding="{Binding value}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                    <Setter Property="TextBlock.Padding" Value="10"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+    </Grid>
+</Window>
